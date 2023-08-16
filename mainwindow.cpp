@@ -19,6 +19,9 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_gerar_clicked()
 {
     try {
+        if (conj){
+            delete conj;
+        }
         if (ui->lineEdit_inputTamanho->text().toInt() <= 0){
             throw QString("Tamanho invalido, precisa ser um numero maior que 0");
         }
