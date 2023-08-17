@@ -54,17 +54,17 @@ Conjunto::~Conjunto()
     }
 }
 
-QString Conjunto::buscarValor(int valor)
+int Conjunto::buscarValor(int valor) const
 {
     if (!array){
         throw QString("Array nao criado");
     }
     for (int i = 0; i < tamanho; i++){
         if (array[i] == valor){
-            return "Valor existe e esta na posicao " + QString::number(i);
+            return i;
         }
     }
-    return "Valor nao existe";
+    return -1;
 }
 
 }

@@ -22,6 +22,15 @@ void MainWindow::on_pushButton_gerar_clicked()
         if (conj){
             delete conj;
         }
+        if (ui->lineEdit_inputTamanho->text().isEmpty()){
+            throw QString("Valor invalido, precisa ser numero");
+        }
+        QString texto = ui->lineEdit_inputTamanho->text();
+        for (int i = 0; i < texto.size(); i++){
+            if (texto[i] > '9' || texto[i] < '0'){
+                throw QString("Valor invalido, precisa ser numero");
+            }
+        }
         if (ui->lineEdit_inputTamanho->text().toInt() <= 0){
             throw QString("Tamanho invalido, precisa ser um numero maior que 0");
         }
@@ -42,7 +51,22 @@ void MainWindow::on_pushButton_buscar_clicked()
         if (!conj){
             throw QString("Conjunto nao criado");
         }
-        ui->textEdit_outputResultado->setText(conj->buscarValor(ui->lineEdit_inputValor->text().toInt()));
+        if (ui->lineEdit_inputValor->text().isEmpty()){
+            throw QString("Valor invalido, precisa ser numero");
+        }
+        QString texto = ui->lineEdit_inputValor->text();
+        for (int i = 0; i < texto.size(); i++){
+            if (texto[i] > '9' || texto[i] < '0'){
+                throw QString("Valor invalido, precisa ser numero");
+            }
+        }
+        int indice = conj->buscarValor(ui->lineEdit_inputValor->text().toInt());
+        if (indice == -1){
+            ui->textEdit_outputResultado->setText("Valor nao existe");
+        }
+        else{
+            ui->textEdit_outputResultado->setText("Valor existe e esta na posicao " + QString::number(indice));
+        }
     } catch (QString &e) {
         QMessageBox::critical(this,"Erro", e);
     }

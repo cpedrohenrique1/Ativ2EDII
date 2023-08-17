@@ -12,7 +12,7 @@ public:
     Conjunto(int tamanho);
     QString getConjunto() const;
     ~Conjunto();
-    QString buscarValor(int valor);
+    int buscarValor(int valor) const;
 };
 }
 
